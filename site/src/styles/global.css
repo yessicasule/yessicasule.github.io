@@ -999,14 +999,6 @@ main > section:nth-of-type(even) {
   padding-block: 0.85rem;
 }
 
-.explorer__badge {
-  font-size: var(--text-xs);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-}
-
 .explorer__hero {
   padding-block: var(--space-6) var(--space-4);
   text-align: left;
@@ -1632,65 +1624,17 @@ main > section:nth-of-type(even) {
   display: block;
 }
 
-/* ---------- Opening crawl ---------- */
+/* ---------- Explorer title ---------- */
 
-.crawl-intro {
+.explorer__name {
+  margin: 0;
   text-align: center;
   font-family: var(--font-serif);
-  font-style: italic;
-  font-size: var(--text-lg);
-  color: #4bd5ee;
-  margin-bottom: var(--space-2);
-}
-
-.crawl-viewport {
-  margin-top: var(--space-4);
-  margin-inline: auto;
-  max-width: 620px;
-  height: 280px;
-  overflow: hidden;
-  perspective: 340px;
-  -webkit-mask-image: linear-gradient(to top, black 0%, black 50%, transparent 96%);
-  mask-image: linear-gradient(to top, black 0%, black 50%, transparent 96%);
-}
-
-.crawl {
-  height: 100%;
-  transform-origin: 50% 100%;
-  transform: rotateX(23deg);
-}
-
-.crawl__inner {
-  /* Negative delay: the crawl is already mid-flight when the page opens,
-     so the viewport is never a blank 280px band. */
-  animation: crawl-scroll 34s linear -7s infinite;
-  color: #ffe81f;
+  font-size: var(--text-hero);
   font-weight: 700;
-  font-size: 1.35rem;
-  line-height: 1.5;
-  text-align: justify;
-  padding-inline: var(--space-3);
-}
-
-.crawl__inner p {
-  max-width: none;
-  margin-bottom: 1.2em;
-}
-
-.crawl__ep {
-  text-align: center;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 1.1rem;
-}
-
-@keyframes crawl-scroll {
-  from {
-    transform: translateY(105%);
-  }
-  to {
-    transform: translateY(-160%);
-  }
+  letter-spacing: 0.03em;
+  color: #ffe81f;
+  text-shadow: 0 0 32px rgba(255, 232, 31, 0.32);
 }
 
 /* Explorer flourishes: saber-ignition rules + drifting crew */
@@ -2425,22 +2369,6 @@ main > section:nth-of-type(even) {
 /* ---------- Explorer reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .crawl-viewport {
-    height: auto;
-    perspective: none;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .crawl {
-    transform: none;
-  }
-
-  .crawl__inner {
-    animation: none;
-    font-size: 1.05rem;
-  }
-
   .explorer .section__title::after {
     animation: none;
   }
@@ -2582,8 +2510,6 @@ main > section:nth-of-type(even) {
 }
 
 .explorer__intro {
-  /* Room under the crawl: its bottom edge is hard by design, so it should not
-     sit flush against the first station panel. */
   padding-block: var(--space-5) var(--space-5);
 }
 

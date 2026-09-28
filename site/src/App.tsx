@@ -73,9 +73,9 @@ export default function App() {
         <Achievements />
         <Education />
         <Contact />
-        <LegoExplorers onAction={handleCrew} />
       </main>
       <Footer />
+      <LegoExplorers onAction={handleCrew} />
 
       <Terminal open={terminalOpen} onClose={() => setTerminalOpen(false)} />
       <FortuneCookie open={fortuneOpen} onClose={() => setFortuneOpen(false)} />
