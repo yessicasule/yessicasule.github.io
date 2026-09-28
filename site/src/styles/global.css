@@ -271,7 +271,14 @@ ul {
   padding-block: var(--space-6);
 }
 
-.section--wash {
+/*
+ * Alternate the section backgrounds structurally instead of per-component. The
+ * old per-section `wash` flag drifted out of step: the Hero is main's first
+ * <section> and carried no wash, so Experience repeated it and the top of the
+ * page read as one flat block. Counting here keeps the rhythm correct however
+ * the sections are reordered.
+ */
+main > section:nth-of-type(even) {
   background: var(--bg-wash);
   border-block: 1px solid var(--line);
 }
@@ -645,7 +652,13 @@ ul {
 .marquee__item {
   flex-shrink: 0;
   width: 260px;
-  height: 180px;
+  /*
+   * Three of the four montage photos are 3:4 portraits and the fourth is
+   * landscape. A 3:4 frame shows the portraits whole and trims only the wide
+   * one's empty edges, so every group stays fully in frame and all the tiles
+   * still read as one even row.
+   */
+  aspect-ratio: 3 / 4;
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
@@ -1562,7 +1575,6 @@ ul {
 
   .marquee__item {
     width: 200px;
-    height: 140px;
   }
 
   .lego-figure {
@@ -1782,6 +1794,10 @@ ul {
 .fun__side {
   position: sticky;
   top: 4.5rem;
+  /* Stacked panels need the same gutter .fun__main gives its children. */
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
 }
 
 @media (max-width: 940px) {
@@ -2596,7 +2612,8 @@ ul {
   gap: var(--space-5);
 }
 
-.fun__main {
+.fun__main,
+.fun__side {
   gap: var(--space-5);
 }
 

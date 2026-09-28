@@ -281,12 +281,24 @@ export interface MontageImage {
   alt: string;
 }
 
-/** Swap these for real photos (jpg/png) — keep the list in display order. */
+/** Achievement photos — keep the list in display order. */
 export const montage: MontageImage[] = [
-  { src: "assets/montage/placeholder-1.svg", alt: "Achievement highlight 1" },
-  { src: "assets/montage/placeholder-2.svg", alt: "Achievement highlight 2" },
-  { src: "assets/montage/placeholder-3.svg", alt: "Achievement highlight 3" },
-  { src: "assets/montage/placeholder-4.svg", alt: "Achievement highlight 4" },
+  {
+    src: "assets/montage/india-innovates-2026.jpg",
+    alt: "Yessica with her team at the India Innovates 2026 national hackathon in Delhi.",
+  },
+  {
+    src: "assets/montage/ieee-ies-conference.jpg",
+    alt: "Yessica and co-presenters at the IEEE Industrial Electronics Society conference, KLH University.",
+  },
+  {
+    src: "assets/montage/spjimr-abhyudaya-certificate.jpg",
+    alt: "Yessica receiving her SPJIMR Abhyudaya teaching-volunteer certificate.",
+  },
+  {
+    src: "assets/montage/spjimr-campus.jpg",
+    alt: "Yessica with fellow Abhyudaya volunteers at the Bharatiya Vidya Bhavan's SPJIMR campus.",
+  },
 ];
 
 export const education = [

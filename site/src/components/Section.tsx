@@ -5,16 +5,15 @@ interface SectionProps {
   id: string;
   kicker?: string;
   title: string;
-  wash?: boolean;
   children: ReactNode;
 }
 
-export function Section({ id, kicker, title, wash, children }: SectionProps) {
+export function Section({ id, kicker, title, children }: SectionProps) {
   const reduced = useReducedMotion();
   const [hasRevealed, setHasRevealed] = useState(false);
 
   return (
-    <section id={id} className={`section${wash ? " section--wash" : ""}`} aria-labelledby={`${id}-title`}>
+    <section id={id} className="section" aria-labelledby={`${id}-title`}>
       <motion.div
         className="container"
         initial={reduced ? false : { opacity: 0, y: 18 }}

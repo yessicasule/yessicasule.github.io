@@ -165,7 +165,7 @@ export function Projects() {
   };
 
   return (
-    <Section id="projects" kicker="Mission Logs" title="Projects" wash>
+    <Section id="projects" kicker="Mission Logs" title="Projects">
       <h3 className="group__label">Selected work</h3>
       <div className="acc">{featured.map(row)}</div>
 

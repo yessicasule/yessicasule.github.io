@@ -3,7 +3,7 @@ import { Section } from "./Section";
 
 export function Certifications() {
   return (
-    <Section id="certifications" title="Certifications" wash>
+    <Section id="certifications" title="Certifications">
       <div className="grid-2">
         {certifications.map((c) => (
           <article className="card" key={c.title}>

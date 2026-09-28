@@ -3,7 +3,7 @@ import { Section } from "./Section";
 
 export function Education() {
   return (
-    <Section id="education" title="Education" wash>
+    <Section id="education" title="Education">
       <ol className="timeline">
         {education.map((e) => (
           <li key={e.school}>
