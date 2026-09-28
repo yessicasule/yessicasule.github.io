@@ -6,29 +6,20 @@ export function Header() {
 
   return (
     <header className="site-header">
-      <div className="container site-header__inner" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div className="container site-header__inner">
         <a className="site-header__name" href="#about">
           Yessica <em>Sule</em>
         </a>
-        <nav className="site-nav" aria-label="Primary" style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <nav className="site-nav" aria-label="Primary">
           {nav.map((item) => (
             <a key={item.id} href={`#${item.id}`}>
               {item.label}
             </a>
           ))}
           <button
+            className="site-nav__theme"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             aria-label="Toggle theme"
-            style={{
-              background: "var(--bg-wash)",
-              color: "var(--ink)",
-              border: "1px solid var(--line)",
-              padding: "0.25rem 0.75rem",
-              borderRadius: "var(--radius)",
-              cursor: "pointer",
-              marginLeft: "1rem",
-              fontWeight: "bold"
-            }}
           >
             {theme === "light" ? "𖤓" : "𖤓"}
           </button>
