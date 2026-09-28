@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="525" viewBox="0 0 1200 525">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fcffeb"/>
+      <stop offset="1" stop-color="#fecdaa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="525" fill="url(#g)"/>
+  <circle cx="220" cy="110" r="52" fill="#fafac6" opacity="0.9"/>
+  <text x="600" y="250" text-anchor="middle" font-family="Georgia, serif" font-size="42" fill="#474350">Achievement photo 4</text>
+  <text x="600" y="300" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" fill="#5f5a6b">Replace: site/public/assets/montage/placeholder-4.svg</text>
+</svg>

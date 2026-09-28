@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+
+# build output
+site/dist/
+site/*.tsbuildinfo
+
+# personal source documents — originals stay on disk, not in the repo.
+# Anything the site actually serves lives in site/public/assets/.
+*.pdf
+*.jpg
+*.jpeg
+*.png
+!site/public/**
+!site/src/**
+
+# stray lockfile at the repo root (the real one is site/package-lock.json)
+/package-lock.json

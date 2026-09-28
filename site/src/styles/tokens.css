@@ -1,0 +1,68 @@
+/* ============================================================
+   Design tokens — Professional Mode
+   Palette: Steel Blue (monochromatic)
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --bg: #eff3f6;            /* steel-blue-50 */
+  --bg-raised: #dfe7ec;     /* steel-blue-100 */
+  --bg-wash: #bfd0d9;       /* steel-blue-200 */
+  --line: #9fb8c6;          /* steel-blue-300 */
+  --line-strong: #7ea0b4;   /* steel-blue-400 */
+
+  /* Ink */
+  --ink: #0d1316;           /* steel-blue-950 */
+  --ink-soft: #131b20;      /* steel-blue-900 */
+  --ink-faint: #263740;     /* steel-blue-800 */
+
+  /* Accents */
+  --accent: #4b6d81;        /* steel-blue-600 */
+  --accent-ink: #263740;    /* steel-blue-800 (readable against bg) */
+  --accent-wash: #dfe7ec;   /* steel-blue-100 */
+
+  /* Type */
+  --font-serif: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Source Sans 3 Variable", "Segoe UI", system-ui, sans-serif;
+
+  /* Scale */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.375rem;
+  --text-xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+  --text-hero: clamp(2.4rem, 1.6rem + 3.6vw, 4.25rem);
+
+  /* Rhythm */
+  --space-1: 0.375rem;
+  --space-2: 0.75rem;
+  --space-3: 1.25rem;
+  --space-4: 2rem;
+  --space-5: 3.25rem;
+  --space-6: 5.5rem;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --measure: 68ch;
+
+  --shadow-soft: 0 1px 2px rgba(13, 19, 22, 0.06), 0 8px 28px rgba(13, 19, 22, 0.08);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Deep-space theme — Dark Mode */
+:root[data-theme="dark"] {
+  --bg: #0d1316;            /* steel-blue-950 */
+  --bg-raised: #131b20;     /* steel-blue-900 */
+  --bg-wash: #263740;       /* steel-blue-800 */
+  --line: #395260;          /* steel-blue-700 */
+  --line-strong: #4b6d81;   /* steel-blue-600 */
+
+  --ink: #eff3f6;           /* steel-blue-50 */
+  --ink-soft: #dfe7ec;      /* steel-blue-100 */
+  --ink-faint: #bfd0d9;     /* steel-blue-200 */
+
+  --accent: #5e88a1;        /* steel-blue-500 */
+  --accent-ink: #bfd0d9;    /* steel-blue-200 (readable against dark bg) */
+  --accent-wash: #263740;   /* steel-blue-800 */
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.45), 0 8px 28px rgba(0, 0, 0, 0.5);
+}
