@@ -14,7 +14,7 @@ export const identity = {
   github: "https://github.com/yessicasule",
   intro:
     "I work at the intersection of AI, computer vision, robotics, and efficient machine learning systems. " +
-    "I enjoy taking on problems that don't have obvious answers. I build from first principles when necessary, " +
+    "I build from first principles when necessary, " +
     "benchmark what I build, and keep iterating until it delivers real results — whether it's research, " +
     "engineering, experimentation, or something completely new. Learn by doing, turn ideas into results.",
   languages: ["English", "Marathi", "Hindi", "Gujarati", "German (A2)"],
@@ -185,6 +185,12 @@ export const projects: Project[] = [
   },
   {
     id: "multilingual-nlp",
+    media: [
+      { src: "assets/shots/multilingual-nlp/1.png", type: "image" },
+      { src: "assets/shots/multilingual-nlp/2.png", type: "image" },
+      { src: "assets/shots/multilingual-nlp/3.png", type: "image" },
+      { src: "assets/shots/multilingual-nlp/4.png", type: "image" },
+    ],
     github: "https://github.com/yessicasule/Communication-Analyzer",
     short: "Multilingual Text Analysis",
     domain: "NLP & Multilingual AI",
