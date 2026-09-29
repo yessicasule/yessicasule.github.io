@@ -140,16 +140,20 @@ export const projects: Project[] = [
     domain: "Computer Vision & Perception",
     title: "Monocular Human Motion Tracking for Rehabilitation Robotics",
     overview:
-      "A single-camera system that estimates arm joint angles in real time and streams " +
-      "them into a rehabilitation robotics pipeline — pose estimation, signal filtering, " +
-      "UDP transport, and live Unity visualization, validated with biomechanical benchmarking. " +
-      "Built during my research internship at Wired Lab, IIT Bombay.",
+      "Measuring how well a patient can move their arm normally needs an expensive " +
+      "motion-capture lab. This does it with one ordinary camera: it watches the patient " +
+      "move, works out how far each joint is bending, and draws a live 3D figure copying " +
+      "them on screen, so the patient and the clinician can both see progress as it " +
+      "happens. Built during my research internship at Wired Lab, IIT Bombay.",
     stack: ["Python", "OpenCV", "MediaPipe", "Signal Processing", "UDP", "Unity"],
     details:
-      "The system uses MediaPipe Pose for initial landmark detection, followed by a custom " +
-      "Kalman filter for noise reduction. Joint angles are computed via 3D vector math and " +
-      "streamed over UDP at 30 fps to a Unity-based rehabilitation interface that provides " +
-      "real-time visual feedback to patients and clinicians.",
+      "MediaPipe Pose supplies the initial landmarks; a custom Kalman filter smooths the " +
+      "jitter that makes raw single-camera pose estimation unusable for measurement. Joint " +
+      "angles are derived through 3D vector math and streamed over UDP at 30 fps into a " +
+      "Unity digital twin, which plays four avatars side by side so model outputs can be " +
+      "compared against each other in motion. The stream carries confidence scores and " +
+      "uncertainty metrics alongside the angles, and an interactive calibration wizard with " +
+      "SciPy/Matplotlib CSV logging supports time-series kinematic analysis after a session.",
   },
   {
     id: "ar-indoor-navigation",
@@ -168,15 +172,19 @@ export const projects: Project[] = [
     domain: "Spatial Computing & Navigation",
     title: "AR-Based Indoor Navigation System",
     overview:
-      "A full-stack indoor guidance platform: augmented-reality navigation overlaid on " +
-      "the real world, an interactive map view, route planning, and nearby search — " +
-      "solving wayfinding where GPS can't follow.",
+      "GPS stops working the moment you walk indoors, which is why people get lost in " +
+      "places like metro stations and hospitals. This phone app shows the way by drawing " +
+      "arrows directly onto the live camera view, so you follow them through the building " +
+      "the way you would follow signs — with a map, step-by-step directions and a search " +
+      "for what is nearby if you prefer those instead.",
     stack: ["React Native", "ViroReact", "Node.js", "Express", "Firebase", "A* Pathfinding"],
     details:
-      "The React Native client renders 3D directional overlays through ViroReact, combining " +
-      "SLAM tracking with QR-based positioning to stay located indoors. A Node.js/Express " +
-      "backend computes optimal routes with the A* algorithm over graph-based waypoints and " +
-      "handles dynamic route management, with Firebase behind the venue data.",
+      "The React Native client renders 3D directional overlays through ViroReact. Position " +
+      "indoors comes from SLAM tracking corrected by QR anchor points, which bounds the " +
+      "drift that makes pure visual-inertial tracking unreliable over a long walk. A " +
+      "Node.js/Express backend models the venue as a waypoint graph and solves routes with " +
+      "A*, recomputing when the user leaves the path; Firebase stores the venue and " +
+      "waypoint data.",
   },
   {
     id: "green-ai",
@@ -193,16 +201,19 @@ export const projects: Project[] = [
     domain: "Sustainable & Efficient AI",
     title: "Green AI — Energy-Aware Inference Framework",
     overview:
-      "An inference framework that dynamically adjusts model precision (4-, 8-, 12-, and " +
-      "16-bit) based on prompt complexity using fuzzy-logic decision-making, with " +
-      "intelligent routing and quantization to cut computational cost and energy use " +
-      "while preserving response quality.",
+      "Running AI models burns a lot of electricity, and much of it is wasted: a simple " +
+      "question gets answered by the same heavyweight model as a hard one. This works out " +
+      "how difficult each question actually is, then routes it to the lightest setting that " +
+      "can still answer it properly — cutting the energy a system uses without the answers " +
+      "getting worse.",
     stack: ["Python", "Fuzzy Logic", "RouteLLM", "Quantization", "LLM Optimization"],
     details:
-      "Prompt complexity is scored by a fuzzy inference system (token count, vocabulary " +
-      "diversity, syntactic depth). RouteLLM then selects the most energy-efficient model " +
-      "variant capable of producing quality output. Quantization profiles (4/8/12/16-bit) " +
-      "are pre-calibrated per model, allowing instant switching with minimal accuracy loss.",
+      "A fuzzy inference system scores prompt complexity from token count, vocabulary " +
+      "diversity and syntactic depth — fuzzy rather than a hard threshold because the " +
+      "boundary between an easy and a hard prompt is genuinely gradual. RouteLLM then " +
+      "selects the cheapest model variant expected to clear the quality bar. Quantization " +
+      "profiles at 4, 8, 12 and 16 bits are pre-calibrated per model, so precision can be " +
+      "switched per request rather than per deployment, keeping accuracy loss minimal.",
   },
   {
     id: "multilingual-nlp",
@@ -217,18 +228,20 @@ export const projects: Project[] = [
     domain: "NLP & Multilingual AI",
     title: "Intelligent Multilingual Text Analysis Platform",
     overview:
-      "A multilingual NLP platform that analyzes, compares, and interprets text across " +
-      "multiple languages using a modular pipeline — language-aware preprocessing, " +
-      "tokenization, lemmatization, sentiment analysis, keyword extraction, and linguistic " +
-      "pattern discovery with comparative analysis between languages and writing systems.",
+      "Most text-analysis tools only really work in English. This one reads writing in " +
+      "several languages and reports what it finds: the mood of the text, the words that " +
+      "carry the most meaning, and how the same idea gets expressed differently from one " +
+      "language to the next — including languages that do not share an alphabet.",
     stack: ["Python", "NLP", "Tokenization", "Sentiment Analysis", "Data Visualization"],
     details:
-      "Designed to generalize NLP pipelines beyond English-centric datasets. The architecture " +
-      "separates preprocessing, feature extraction, and analysis modules for rapid experimentation " +
-      "with new languages, tokenizers, and ML models. Provides interactive visualizations and " +
-      "statistical summaries of vocabulary distributions, sentiment trends, and semantic " +
-      "relationships across documents — suitable for linguistic research and multilingual " +
-      "content intelligence.",
+      "Built to generalise NLP pipelines beyond English-centric datasets. Preprocessing, " +
+      "feature extraction and analysis are separate modules, so a new language, tokenizer " +
+      "or model can be swapped in without touching the rest of the pipeline — the part that " +
+      "usually breaks when a monolingual tool is stretched to cover more languages. " +
+      "Tokenization and lemmatization are language-aware rather than shared, since " +
+      "whitespace segmentation fails outside Latin scripts. Output is statistical summaries " +
+      "and interactive visualisations of vocabulary distribution, sentiment trend and " +
+      "cross-document semantic relationships.",
   },
   {
     id: "medical-care",
@@ -247,15 +260,18 @@ export const projects: Project[] = [
     domain: "Healthcare Technology & Full-Stack",
     title: "Medical Care Management System",
     overview:
-      "A comprehensive healthcare management platform with dedicated portals for patients, " +
-      "doctors, receptionists, and administrators — centralizing appointment scheduling, " +
-      "medical records, billing, and patient management into a single secure platform.",
+      "Clinics usually run appointments, patient records and billing across separate " +
+      "systems and a lot of paper. This puts all of it in one place and gives each group of " +
+      "people their own view of it — patients, doctors, receptionists and administrators. " +
+      "It also runs the waiting queue itself: issuing tokens, ordering patients by urgency, " +
+      "and telling each one roughly how long the wait will be.",
     stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "TanStack Query"],
     details:
       "Role-based access separates the Patient, Doctor, Receptionist and Administrator " +
-      "views. The platform automates patient queue management with priority scheduling, " +
-      "token generation and wait-time estimation, and uses TanStack Query to keep those " +
-      "queues synchronised across the people watching them.",
+      "views over shared records. Queue management is automated through priority " +
+      "scheduling, token generation and wait-time estimation. TanStack Query holds the " +
+      "queue state, so the reception desk, the consulting room and the waiting patient read " +
+      "the same position rather than three cached copies drifting apart.",
   },
 ];
 

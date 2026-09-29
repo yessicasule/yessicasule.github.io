@@ -30,14 +30,16 @@ export function Experience() {
                 </span>
               )}
             </span>
-            <div>
+            <div className="card__headline">
               <h3>{role.title}</h3>
-              <p className="card__sub">
-                {role.org}
-                {role.period && <span className="card__period"> · {role.period}</span>}
-                {role.location && <span className="card__period"> · {role.location}</span>}
-              </p>
+              <p className="card__sub">{role.org}</p>
             </div>
+            {(role.period || role.location) && (
+              <div className="card__when">
+                {role.period && <span className="card__period">{role.period}</span>}
+                {role.location && <span className="card__where">{role.location}</span>}
+              </div>
+            )}
           </div>
 
           <div className={role.certificate ? "card__body card__body--split" : "card__body"}>

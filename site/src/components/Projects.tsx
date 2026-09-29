@@ -91,7 +91,10 @@ export function Projects() {
               <div className="acc__panel-inner">
                 <div className="acc__col-text">
                 <p className="acc__full-title">{p.title}</p>
-                <p>{p.overview}</p>
+                <div className="case">
+                  <h5 className="case__label">What it does</h5>
+                  <p>{p.overview}</p>
+                </div>
                 {p.problem && (
                   <div className="case">
                     <h5 className="case__label">The problem</h5>
