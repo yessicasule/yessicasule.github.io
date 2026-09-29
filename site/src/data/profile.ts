@@ -5,18 +5,18 @@
 
 export const identity = {
   name: "Yessica Sule",
-  role: "AI & Computer Vision",
-  tagline: "Final-year Computer Engineering student, Sardar Patel Institute of Technology",
+  role: "Final-year Computer Engineering student, Sardar Patel Institute of Technology",
+  tagline: "",
   location: "Mumbai, India",
   email: "yessicasule@gmail.com",
   // TODO(Yessica): confirm exact profile URLs before Stage 2 review
   linkedin: "https://www.linkedin.com/in/yessica-sule",
   github: "https://github.com/yessicasule",
   intro:
-    "I work at the intersection of AI and computer vision — from real-time human " +
-    "motion tracking for rehabilitation robotics to energy-aware model inference. " +
-    "I care about rigor: benchmarked pipelines, honest evaluation, and systems that " +
-    "hold up outside the demo. I am willing to learn, and I will deliver results.",
+    "I work at the intersection of AI, computer vision, robotics, and efficient machine learning systems. " +
+    "I enjoy taking on problems that don't have obvious answers. I build from first principles when necessary, " +
+    "benchmark what I build, and keep iterating until it delivers real results — whether it's research, " +
+    "engineering, experimentation, or something completely new. Learn by doing, turn ideas into results.",
   languages: ["English", "Marathi", "Hindi", "Gujarati", "German (A2)"],
   /** Swappable asset slot — replace the PDF at site/public/assets/resume.pdf */
   resumeHref: "assets/resume.pdf" as string | null,

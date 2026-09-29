@@ -176,9 +176,6 @@ ul {
 .hero {
   padding-block: var(--space-6) var(--space-5);
   border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(1100px 500px at 85% -10%, rgba(254, 205, 170, 0.35), transparent 65%),
-    radial-gradient(900px 420px at -10% 110%, rgba(71, 67, 80, 0.05), transparent 60%);
 }
 
 .hero__grid {

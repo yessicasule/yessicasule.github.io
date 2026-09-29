@@ -6,7 +6,7 @@ export function Hero() {
       <div className="container hero__grid">
         <div>
           <p className="hero__kicker">
-            {identity.role} · {identity.tagline}
+            {identity.role}
           </p>
           <h1>{identity.name}</h1>
           <p className="hero__intro">{identity.intro}</p>
