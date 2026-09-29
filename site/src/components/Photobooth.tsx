@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { identity } from "../data/profile";
 import { discover } from "../lib/discoveries";
+import { PHOTOBOOTH_ENDPOINT, sendStrip } from "../lib/photobooth";
 
 type Phase = "idle" | "live" | "shooting" | "shot" | "denied" | "unsupported";
 
@@ -22,9 +23,10 @@ const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
  * Everything happens on the visitor's machine: the webcam stream never leaves
  * the page, and the strip only becomes a file when they ask for one.
  *
- * "Send" is a save + mailto handoff rather than a true upload — this is a
- * static site with no backend, and mailto: cannot carry an attachment. See
- * PROJECT-VISION.md decision #23 for the upgrade path.
+ * "Send to Yessica" POSTs the strip to a Google Apps Script web app, which
+ * emails it to her with the image attached. If no endpoint is configured yet
+ * it degrades to a save + mail-client handoff, since mailto: alone cannot
+ * carry an attachment.
  */
 export function Photobooth() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -37,6 +39,10 @@ export function Photobooth() {
   const [flash, setFlash] = useState(false);
   const [strip, setStrip] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [from, setFrom] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState<"idle" | "sent" | "failed">("idle");
+  const stripCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const stopCamera = useCallback(() => {
     streamRef.current?.getTracks().forEach((t) => t.stop());
@@ -179,6 +185,7 @@ export function Photobooth() {
     ctx.lineWidth = 2;
     ctx.strokeRect(1, 1, STRIP_W - 2, STRIP_H - 2);
 
+    stripCanvasRef.current = canvas;
     return canvas.toDataURL("image/png");
   };
 
@@ -217,6 +224,7 @@ export function Photobooth() {
       setStrip(png);
       setPhase("shot");
       setCopied(false);
+      setSent("idle");
       discover("portrait");
     } else {
       setPhase("live");
@@ -244,7 +252,8 @@ export function Photobooth() {
     }
   };
 
-  const send = () => {
+  /** Falls back to the mail client when no endpoint is configured. */
+  const handoffToMailClient = () => {
     save();
     const subject = "A transmission from the Explorer Station";
     const body = [
@@ -257,6 +266,31 @@ export function Photobooth() {
     window.location.href = `mailto:${identity.email}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
+  };
+
+  const send = async () => {
+    if (!PHOTOBOOTH_ENDPOINT) {
+      handoffToMailClient();
+      return;
+    }
+    const canvas = stripCanvasRef.current;
+    if (!canvas) return;
+
+    setSending(true);
+    setSent("idle");
+    // JPEG rather than PNG: visually identical for this duotone, and a
+    // fraction of the payload to push over the wire.
+    const image = canvas.toDataURL("image/jpeg", 0.92).split(",")[1] ?? "";
+    const result = await sendStrip({ image, from: from.trim() });
+    setSending(false);
+
+    if (result === "sent") {
+      setSent("sent");
+    } else if (result === "unconfigured") {
+      handoffToMailClient();
+    } else {
+      setSent("failed");
+    }
   };
 
   const showingStrip = phase === "shot" && strip;
@@ -312,9 +346,28 @@ export function Photobooth() {
           </button>
         ) : (
           <>
-            <button type="button" className="booth__btn booth__btn--go" onClick={send}>
-              ✉ Send to Yessica
+            <input
+              className="booth__name"
+              type="text"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+              placeholder="Your name (optional)"
+              maxLength={60}
+              disabled={sending || sent === "sent"}
+            />
+            <button
+              type="button"
+              className="booth__btn booth__btn--go"
+              onClick={send}
+              disabled={sending || sent === "sent"}
+            >
+              {sending ? "Transmitting…" : sent === "sent" ? "✓ Sent" : "✉ Send to Yessica"}
             </button>
+            {sent === "failed" && (
+              <p className="booth__hint booth__hint--warn">
+                That didn't go through. Save the strip and email it instead — or try again.
+              </p>
+            )}
             <div className="booth__row">
               <button type="button" className="booth__btn" onClick={save}>
                 ↓ Save
@@ -327,8 +380,11 @@ export function Photobooth() {
               </button>
             </div>
             <p className="booth__hint">
-              Sending saves the strip, then opens your mail app — attach the saved file, or paste
-              the copied one straight into the message.
+              {sent === "sent"
+                ? "Your strip is on its way to Yessica. Save a copy for yourself below."
+                : PHOTOBOOTH_ENDPOINT
+                  ? "Sending delivers the strip straight to Yessica's inbox."
+                  : "Sending saves the strip, then opens your mail app — attach the saved file, or paste the copied one straight into the message."}
             </p>
           </>
         )}

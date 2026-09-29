@@ -2763,3 +2763,26 @@ main > section:nth-of-type(even) {
     opacity: 0;
   }
 }
+
+.booth__name {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius);
+  border: 1px solid #453f5b;
+  background: #0f0d18;
+  color: #d8d4c8;
+  font: inherit;
+  font-size: var(--text-xs);
+}
+
+.booth__name::placeholder {
+  color: #6b7c8c;
+}
+
+.booth__name:disabled {
+  opacity: 0.55;
+}
+
+.booth__hint--warn {
+  color: #f0a3a3;
+}
