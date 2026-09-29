@@ -4,10 +4,8 @@ import { Section } from "./Section";
 
 export function Achievements() {
   return (
-    <Section id="achievements" kicker="Recognition" title="Achievements & Leadership">
+    <Section id="achievements" title="Achievements & Leadership">
       <AchievementsMontage />
-
-      <h3 className="group__label">Achievements</h3>
       <div className="grid-2">
         {achievements.map((a) => (
           <article className="card" key={a.title}>
@@ -27,10 +25,6 @@ export function Achievements() {
             )}
           </article>
         ))}
-      </div>
-
-      <h3 className="group__label group__label--muted">Leadership</h3>
-      <div className="grid-2">
         {leadership.map((l) => (
           <article className="card" key={l.title}>
             {l.logo ? (

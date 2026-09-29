@@ -373,12 +373,28 @@ export const montage: MontageImage[] = [
     alt: "Yessica and co-presenters at the IEEE Industrial Electronics Society conference, KLH University.",
   },
   {
+    src: "assets/montage/ieee-ies-stage.jpg",
+    alt: "Yessica on stage at the IEEE Industrial Electronics Society conference, KLH University Aziznagar campus.",
+  },
+  {
     src: "assets/montage/spjimr-abhyudaya-certificate.jpg",
     alt: "Yessica receiving her SPJIMR Abhyudaya teaching-volunteer certificate.",
   },
   {
     src: "assets/montage/spjimr-campus.jpg",
     alt: "Yessica with fellow Abhyudaya volunteers at the Bharatiya Vidya Bhavan's SPJIMR campus.",
+  },
+  {
+    src: "assets/montage/abhyudaya-classroom.jpg",
+    alt: "A classroom session with students working at laptops.",
+  },
+  {
+    src: "assets/montage/campus-event.jpg",
+    alt: "Yessica with a faculty member and a fellow student at an evening campus event.",
+  },
+  {
+    src: "assets/montage/project-team.jpg",
+    alt: "Yessica with her project team in front of a lecture-hall blackboard.",
   },
 ];
 
