@@ -231,7 +231,7 @@ export function Photobooth() {
     }
   };
 
-  const filename = `explorer-station-${new Date().toISOString().slice(0, 10)}.png`;
+  const filename = `yevaverse-${new Date().toISOString().slice(0, 10)}.png`;
 
   const save = () => {
     if (!strip) return;

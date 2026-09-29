@@ -3002,3 +3002,9 @@ main > section:nth-of-type(even) {
   border: 5px solid transparent;
   border-top-color: #16121c;
 }
+
+/* Stacked role cards were touching edge to edge; the rounded corners alone
+   were doing the separating. */
+#experience .card + .card {
+  margin-top: var(--space-3);
+}
