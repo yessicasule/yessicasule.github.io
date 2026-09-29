@@ -68,6 +68,13 @@ export const experience = [
   },
 ];
 
+export interface ProjectMedia {
+  src: string;
+  type: "image" | "video";
+  /** Still shown before a video is played, so nothing downloads unasked. */
+  poster?: string;
+}
+
 export interface Project {
   id: string;
   /** Flagship work — rendered first, under "Selected work" */
@@ -90,11 +97,11 @@ export interface Project {
   paperLink?: string;
   demoLink?: string;
   /**
-   * Screenshots of the built thing. Drop files in site/public/assets/shots/
-   * and list them here, e.g. ["assets/shots/green-ai-1.png"]. While this is
-   * empty the panel shows an empty frame marking where they will go.
+   * Screenshots and demo clips, shown in order. Files live in
+   * site/public/assets/shots/<project id>/ and keep their original numbering,
+   * which is the order they appear in.
    */
-  images?: string[];
+  media?: ProjectMedia[];
 }
 
 /**
@@ -125,6 +132,15 @@ export const projects: Project[] = [
   },
   {
     id: "ar-indoor-navigation",
+    media: [
+      { src: "assets/shots/ar-indoor-navigation/1.mp4", type: "video", poster: "assets/shots/ar-indoor-navigation/2.jpg" },
+      { src: "assets/shots/ar-indoor-navigation/2.jpg", type: "image" },
+      { src: "assets/shots/ar-indoor-navigation/3.png", type: "image" },
+      { src: "assets/shots/ar-indoor-navigation/4.png", type: "image" },
+      { src: "assets/shots/ar-indoor-navigation/5.jpg", type: "image" },
+      { src: "assets/shots/ar-indoor-navigation/6.jpg", type: "image" },
+      { src: "assets/shots/ar-indoor-navigation/7.jpg", type: "image" },
+    ],
     github: "https://github.com/yessicasule/Indoor-Navigation-System",
     featured: true,
     short: "AR Indoor Navigation",
@@ -143,6 +159,13 @@ export const projects: Project[] = [
   },
   {
     id: "green-ai",
+    media: [
+      { src: "assets/shots/green-ai/1.png", type: "image" },
+      { src: "assets/shots/green-ai/2.png", type: "image" },
+      { src: "assets/shots/green-ai/3.png", type: "image" },
+      { src: "assets/shots/green-ai/4.png", type: "image" },
+      { src: "assets/shots/green-ai/5.png", type: "image" },
+    ],
     github: "https://github.com/yessicasule/greenAI",
     featured: true,
     short: "Green AI",
@@ -182,6 +205,16 @@ export const projects: Project[] = [
   },
   {
     id: "medical-care",
+    media: [
+      { src: "assets/shots/medical-care/1.png", type: "image" },
+      { src: "assets/shots/medical-care/2.png", type: "image" },
+      { src: "assets/shots/medical-care/3.png", type: "image" },
+      { src: "assets/shots/medical-care/4.png", type: "image" },
+      { src: "assets/shots/medical-care/5.png", type: "image" },
+      { src: "assets/shots/medical-care/6.png", type: "image" },
+      { src: "assets/shots/medical-care/7.png", type: "image" },
+      { src: "assets/shots/medical-care/8.png", type: "image" },
+    ],
     github: "https://github.com/yessicasule/med",
     short: "Medical Care Management",
     domain: "Healthcare Technology & Full-Stack",

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects, type Project } from "../data/profile";
+import { ProjectGallery } from "./ProjectGallery";
 import { discover } from "../lib/discoveries";
 import { Section } from "./Section";
 
@@ -123,19 +124,7 @@ export function Projects() {
                 </div>
 
                 <div className="acc__col-media">
-                {p.images && p.images.length > 0 ? (
-                  <div className="shots">
-                    {p.images.map((src) => (
-                      <img key={src} className="shots__img" src={src} alt={`${p.short} interface`} loading="lazy" />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="shots">
-                    <div className="shots__empty" aria-hidden="true">
-                      <span>Screenshot</span>
-                    </div>
-                  </div>
-                )}
+                <ProjectGallery media={p.media} label={p.short} />
                 {(p.github || p.paperLink || p.demoLink) && (
                   <div className="acc__links">
                     {p.github && (

@@ -11,8 +11,6 @@ site/*.tsbuildinfo
 *.jpg
 *.jpeg
 *.png
-!site/public/**
-!site/src/**
 
 # working folder of raw project captures — optimised copies that the site
 # actually shows belong in site/public/assets/shots/
@@ -22,3 +20,8 @@ site/*.tsbuildinfo
 
 # stray lockfile at the repo root (the real one is site/package-lock.json)
 /package-lock.json
+
+# ...but everything the site actually ships is tracked. These negations must
+# stay last: a later ignore rule would otherwise win over them.
+!site/public/**
+!site/src/**

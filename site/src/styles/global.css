@@ -2787,3 +2787,127 @@ main > section:nth-of-type(even) {
 .booth__hint--warn {
   color: #f0a3a3;
 }
+
+/* ---------- Project media gallery ---------- */
+
+.gallery {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.gallery__stage {
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: var(--bg-wash);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.gallery__stage:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+.gallery__media {
+  width: 100%;
+  height: 100%;
+  /* contain, not cover: a screenshot cropped is a screenshot ruined. */
+  object-fit: contain;
+  background: #0c1116;
+  display: block;
+}
+
+.gallery__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--bg-raised) 88%, transparent);
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 160ms var(--ease-out), border-color 160ms var(--ease-out);
+}
+
+.gallery__stage:hover .gallery__nav,
+.gallery__stage:focus-within .gallery__nav {
+  opacity: 1;
+}
+
+/* Touch has no hover, so the arrows stay put there. */
+@media (hover: none) {
+  .gallery__nav {
+    opacity: 1;
+  }
+}
+
+.gallery__nav:hover {
+  border-color: var(--accent);
+}
+
+.gallery__nav--prev {
+  left: 8px;
+}
+
+.gallery__nav--next {
+  right: 8px;
+}
+
+.gallery__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.gallery__count {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.gallery__dots {
+  display: flex;
+  gap: 5px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.gallery__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  cursor: pointer;
+}
+
+.gallery__dot--on {
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+.gallery__next-btn {
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-raised);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gallery__next-btn:hover {
+  border-color: var(--accent);
+}
