@@ -22,12 +22,9 @@ export function ExplorerPage() {
           <a className="btn btn--small" href="#/">
             ← Return to the desk
           </a>
+          <h1 className="explorer__name">Yev Skywalker</h1>
         </div>
       </header>
-
-      <section className="explorer__intro container">
-        <h1 className="explorer__name">Yev Skywalker</h1>
-      </section>
 
       <main className="container fun">
         <div className="fun__main">

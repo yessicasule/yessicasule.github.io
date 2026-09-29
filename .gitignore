@@ -14,5 +14,11 @@ site/*.tsbuildinfo
 !site/public/**
 !site/src/**
 
+# working folder of raw project captures — optimised copies that the site
+# actually shows belong in site/public/assets/shots/
+/Project Screenshots/
+*.mp4
+*.mov
+
 # stray lockfile at the repo root (the real one is site/package-lock.json)
 /package-lock.json
