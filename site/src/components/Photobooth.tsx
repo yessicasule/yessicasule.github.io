@@ -174,7 +174,7 @@ export function Photobooth() {
     ctx.textBaseline = "middle";
     ctx.fillStyle = "#4bd5ee";
     ctx.font = "700 21px 'Source Sans 3', system-ui, sans-serif";
-    ctx.fillText("EXPLORER STATION", PAD, capY + 48);
+    ctx.fillText("YESSICA SULE", PAD, capY + 48);
 
     ctx.fillStyle = "#7f93a6";
     ctx.font = "400 16px 'Source Sans 3', system-ui, sans-serif";
@@ -255,9 +255,9 @@ export function Photobooth() {
   /** Falls back to the mail client when no endpoint is configured. */
   const handoffToMailClient = () => {
     save();
-    const subject = "A transmission from the Explorer Station";
+    const subject = "A photo strip from your site";
     const body = [
-      "Hi Yessica — I stopped by your Explorer Station and took a photo strip.",
+      "Hi Yessica — I stopped by your site and took a photo strip.",
       "",
       `(It saved to my downloads as ${filename} — attaching it here.)`,
       "",

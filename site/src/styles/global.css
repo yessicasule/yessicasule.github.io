@@ -1281,7 +1281,7 @@ main > section:nth-of-type(even) {
 
 .terminal {
   width: min(720px, 100%);
-  max-height: min(480px, 80vh);
+  max-height: min(580px, 84vh);
   display: flex;
   flex-direction: column;
   background: #14121d;
@@ -2796,9 +2796,16 @@ main > section:nth-of-type(even) {
   position: relative;
   border-radius: var(--radius);
   border: 1px solid var(--line-strong);
-  background: var(--bg-wash);
+  background: #0c1116;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
+  /* A fixed height, because these captures mix portrait phone screens with
+     landscape dashboards; one aspect ratio always starves one of them. */
+  height: clamp(300px, 42vh, 440px);
+}
+
+.gallery__frame {
+  position: absolute;
+  inset: 0;
 }
 
 .gallery__stage:focus-visible {
@@ -2830,24 +2837,13 @@ main > section:nth-of-type(even) {
   font-size: 1.3rem;
   line-height: 1;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 160ms var(--ease-out), border-color 160ms var(--ease-out);
-}
-
-.gallery__stage:hover .gallery__nav,
-.gallery__stage:focus-within .gallery__nav {
-  opacity: 1;
-}
-
-/* Touch has no hover, so the arrows stay put there. */
-@media (hover: none) {
-  .gallery__nav {
-    opacity: 1;
-  }
+  z-index: 2;
+  transition: background 160ms var(--ease-out), border-color 160ms var(--ease-out);
 }
 
 .gallery__nav:hover {
   border-color: var(--accent);
+  background: var(--bg-raised);
 }
 
 .gallery__nav--prev {
@@ -2893,18 +2889,97 @@ main > section:nth-of-type(even) {
   border-color: var(--accent-ink);
 }
 
-.gallery__next-btn {
-  padding: 0.3rem 0.75rem;
-  border-radius: 999px;
-  border: 1px solid var(--line-strong);
-  background: var(--bg-raised);
-  color: var(--ink);
-  font: inherit;
-  font-size: var(--text-xs);
-  font-weight: 700;
-  cursor: pointer;
+
+
+/* ---------- Certificates beside a role or paper ---------- */
+
+.card__body--split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 260px);
+  gap: var(--space-4);
+  align-items: start;
 }
 
-.gallery__next-btn:hover {
+@media (max-width: 860px) {
+  .card__body--split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cert {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.cert__toggle {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  cursor: pointer;
+  overflow: hidden;
+  text-align: left;
+  transition: border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+}
+
+.cert__toggle:hover {
   border-color: var(--accent);
+  box-shadow: var(--shadow-1);
+}
+
+.cert__thumb {
+  width: 100%;
+  height: 150px;
+  /* cover so the seal and header read at thumbnail size; the expanded view
+     below shows the whole page. */
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  background: #fff;
+}
+
+.cert__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 0.5rem 0.7rem;
+  border-top: 1px solid var(--line);
+}
+
+.cert__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.cert__chev {
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--ink-faint);
+}
+
+.cert__full {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.cert__full img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+/* Organisations with no logo file get their initials rather than a blank tile. */
+.card__monogram {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent-ink);
 }

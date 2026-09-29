@@ -24,6 +24,14 @@ export const identity = {
   portraitSrc: "assets/portrait.jpg" as string | null,
 };
 
+export interface RoleCertificate {
+  /** The PDF a visitor opens. */
+  href: string;
+  /** Rendered first page, shown as the expandable preview. */
+  preview: string;
+  label: string;
+}
+
 export const experience = [
   {
     title: "Software Engineer Research Intern",
@@ -37,7 +45,6 @@ export const experience = [
     bullets: [
       "Developed a monocular vision-based human motion tracking system using Python, OpenCV, and MediaPipe for real-time arm joint angle estimation.",
       "Designed a real-time Unity 3D Digital Twin driven by custom C# UDP socket listeners, animating a 4-avatar side-by-side comparative playback scene at 30+ FPS.",
-      "Built a modular Python-to-Unity socket communication protocol streaming synchronized multi-model joint angles, confidence scores, and real-time uncertainty metrics.",
       "Created an interactive calibration wizard and real-time CSV data logging/visualization suite using SciPy and Matplotlib for dynamic time-series kinematic analysis.",
     ],
   },
@@ -47,6 +54,11 @@ export const experience = [
     period: "June 2026 – July 2026",
     location: "Remote",
     logo: null as string | null,
+    certificate: {
+      href: "assets/certificates/bserc.pdf",
+      preview: "assets/certificates/bserc.jpg",
+      label: "Internship certificate",
+    } as RoleCertificate | undefined,
     summary:
       "A summer programme on AI and engineering for defence and aerospace ecosystems.",
     bullets: [
@@ -60,6 +72,11 @@ export const experience = [
     period: "April 2025 – Feb 2026",
     location: "Mumbai, Maharashtra",
     logo: "assets/logos/spjimr.png" as string | null,
+    certificate: {
+      href: "assets/certificates/abhyudaya.pdf",
+      preview: "assets/certificates/abhyudaya.jpg",
+      label: "Volunteering letter",
+    } as RoleCertificate | undefined,
     summary:
       "Year-long teaching commitment with SPJIMR's social initiative for underprivileged students.",
     bullets: [
@@ -113,6 +130,10 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "motion-tracking",
+    media: [
+      { src: "assets/shots/motion-tracking/1.mp4", type: "video", poster: "assets/shots/motion-tracking/2.png" },
+      { src: "assets/shots/motion-tracking/2.png", type: "image" },
+    ],
     github: "https://github.com/yessicasule/Monocular-Vision-Based-Estimation",
     featured: true,
     short: "Human Motion Tracking",
@@ -250,6 +271,11 @@ export const paper = {
     "label-flipping and backdoor attacks at a 30% malicious-client ratio with roughly " +
     "16.5% compute overhead.",
   pdfHref: "assets/published-paper.pdf",
+  certificate: {
+    href: "assets/certificates/aisiis.pdf",
+    preview: "assets/certificates/aisiis.jpg",
+    label: "IEEE AISIIS 2026 certificate",
+  },
 };
 
 export interface Certification {

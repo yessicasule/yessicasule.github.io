@@ -10,7 +10,6 @@ const TRACKS: Track[] = [
   { title: "Darth Maul Theme", term: "Darth Maul Star Wars theme" },
   { title: "Darth Vader Theme", term: "The Imperial March John Williams" },
   { title: "Duel of the Fates", term: "Duel of the Fates John Williams" },
-  { title: "Across the Stars", term: "Across the Stars John Williams" },
 ];
 
 interface Loaded {

@@ -28,32 +28,31 @@ function respond(cmd: string): { out: string[]; close?: boolean } {
       return {
         out: [
           "Available commands:",
-          "  whoami            who runs this observatory",
-          "  projects          list mission logs",
-          "  open <id>         open a mission log on the main desk",
+          "  whoami            who runs this console",
+          "  projects          list every project and its id",
+          "  open <id>         open that project on the main page",
           "  paper             read the published research (PDF)",
           "  contact           how to reach Yessica",
-          "  theme dark|light  switch the observatory lights",
+          "  theme dark|light  switch the lights",
           "  clear             wipe the console",
           "  exit              close the console",
           "…and a few commands that are not on this list.",
         ],
       };
     case "whoami":
-      return {
-        out: [
-          `${identity.name} — ${identity.tagline}.`,
-          `${identity.role}. ${identity.location}.`,
-          "Willing to learn. Will deliver results.",
-        ],
-      };
+      return { out: ["Hi, I am Yessica Sule!! say hi back"] };
+    case "hi":
+    case "hello":
+    case "hey":
+      return { out: ["Hi! Nice to meet you.", "Try 'projects' to see what I have built."] };
     case "ls":
     case "projects":
       return {
         out: [
-          "Mission logs:",
-          ...projects.map((p) => `  ${p.id.padEnd(24)} ${p.short}`),
-          "Use: open <id>",
+          `Projects (${projects.length}):`,
+          ...projects.map((p) => `  ${p.id.padEnd(22)}${p.short}`),
+          "",
+          "Use: open <id>   e.g. open green-ai",
         ],
       };
     case "open": {
@@ -145,7 +144,7 @@ export function Terminal({ open, onClose }: TerminalProps) {
     <div className="terminal-overlay" role="dialog" aria-modal="true" aria-label="Observatory console">
       <div className="terminal">
         <div className="terminal__bar">
-          <span>observatory — console</span>
+          <span>yessica — console</span>
           <button type="button" className="terminal__close" onClick={onClose} aria-label="Close console">
             ✕
           </button>

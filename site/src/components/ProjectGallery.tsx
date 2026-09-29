@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import type { ProjectMedia } from "../data/profile";
 
 interface Props {
@@ -7,14 +8,22 @@ interface Props {
   label: string;
 }
 
+const slide = {
+  enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 34 : -34 }),
+  center: { opacity: 1, x: 0 },
+  exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -34 : 34 }),
+};
+
 /**
  * One frame at a time, stepped with the arrows. Media keeps the numbering it
  * had on disk, so the sequence is whatever order the files were named in.
  *
- * Videos never preload — a clip only downloads once someone presses play.
+ * The stage is a fixed height rather than a fixed aspect ratio: these captures
+ * are a mix of phone screens and desktop dashboards, and a single ratio starves
+ * one or the other.
  */
 export function ProjectGallery({ media, label }: Props) {
-  const [i, setI] = useState(0);
+  const [[i, dir], setPos] = useState<[number, number]>([0, 0]);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const count = media?.length ?? 0;
@@ -37,8 +46,10 @@ export function ProjectGallery({ media, label }: Props) {
     );
   }
 
-  const item = media[Math.min(i, count - 1)];
-  const step = (delta: number) => setI((prev) => (prev + delta + count) % count);
+  const idx = Math.min(i, count - 1);
+  const item = media[idx];
+  const step = (delta: number) => setPos(([prev]) => [(prev + delta + count) % count, delta]);
+  const goTo = (n: number) => setPos(([prev]) => [n, n > prev ? 1 : -1]);
 
   return (
     <div className="gallery">
@@ -46,7 +57,7 @@ export function ProjectGallery({ media, label }: Props) {
         className="gallery__stage"
         tabIndex={0}
         role="group"
-        aria-label={`${label} media, ${i + 1} of ${count}`}
+        aria-label={`${label} media, ${idx + 1} of ${count}`}
         onKeyDown={(e) => {
           if (e.key === "ArrowRight") {
             e.preventDefault();
@@ -57,26 +68,39 @@ export function ProjectGallery({ media, label }: Props) {
           }
         }}
       >
-        {item.type === "video" ? (
-          <video
+        <AnimatePresence initial={false} custom={dir} mode="popLayout">
+          <motion.div
             key={item.src}
-            ref={videoRef}
-            className="gallery__media"
-            src={item.src}
-            poster={item.poster}
-            controls
-            preload="none"
-            playsInline
-          />
-        ) : (
-          <img
-            key={item.src}
-            className="gallery__media"
-            src={item.src}
-            alt={`${label}, ${i + 1} of ${count}`}
-            loading="lazy"
-          />
-        )}
+            className="gallery__frame"
+            custom={dir}
+            variants={slide}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {item.type === "video" ? (
+              <video
+                ref={videoRef}
+                className="gallery__media"
+                src={item.src}
+                poster={item.poster}
+                controls
+                // metadata, not none: the browser can then show a real first
+                // frame and duration instead of an inert black box.
+                preload="metadata"
+                playsInline
+              />
+            ) : (
+              <img
+                className="gallery__media"
+                src={item.src}
+                alt={`${label}, ${idx + 1} of ${count}`}
+                loading="lazy"
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
 
         {count > 1 && (
           <>
@@ -103,23 +127,20 @@ export function ProjectGallery({ media, label }: Props) {
       {count > 1 && (
         <div className="gallery__bar">
           <span className="gallery__count">
-            {i + 1} / {count}
+            {idx + 1} / {count}
           </span>
           <div className="gallery__dots">
             {media.map((m, n) => (
               <button
                 key={m.src}
                 type="button"
-                className={`gallery__dot${n === i ? " gallery__dot--on" : ""}`}
-                onClick={() => setI(n)}
+                className={`gallery__dot${n === idx ? " gallery__dot--on" : ""}`}
+                onClick={() => goTo(n)}
                 aria-label={`Go to ${n + 1}`}
-                aria-current={n === i}
+                aria-current={n === idx}
               />
             ))}
           </div>
-          <button type="button" className="gallery__next-btn" onClick={() => step(1)}>
-            Next ›
-          </button>
         </div>
       )}
     </div>
