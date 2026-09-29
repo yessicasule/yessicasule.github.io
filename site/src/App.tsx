@@ -74,8 +74,8 @@ export default function App() {
         <Education />
         <Contact />
       </main>
-      <Footer />
       <LegoExplorers onAction={handleCrew} />
+      <Footer />
 
       <Terminal open={terminalOpen} onClose={() => setTerminalOpen(false)} />
       <FortuneCookie open={fortuneOpen} onClose={() => setFortuneOpen(false)} />
