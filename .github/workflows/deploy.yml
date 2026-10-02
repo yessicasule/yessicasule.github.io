@@ -21,6 +21,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Re-running an old run replays that old commit and publishes it over
+      # whatever is live. That happened on 2026-10-02: a re-run of the very
+      # first run put the 28 Sep build back on the site. Fail instead.
+      - name: Refuse to publish a commit that is no longer the tip of main
+        run: |
+          git fetch --depth=1 origin main
+          latest=$(git rev-parse FETCH_HEAD)
+          if [ "$GITHUB_SHA" != "$latest" ]; then
+            echo "::error::This run builds $GITHUB_SHA but main is now $latest."
+            echo "Publishing it would roll the live site back. Re-run the newest run, or use Run workflow on main."
+            exit 1
+          fi
+          echo "$GITHUB_SHA is the tip of main - continuing."
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
