@@ -1430,12 +1430,6 @@ main > section:nth-of-type(even) {
   margin-bottom: var(--space-1);
 }
 
-.cookie__source {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  color: #a85524;
-  margin: 0;
-}
 
 .cookie__actions {
   display: flex;

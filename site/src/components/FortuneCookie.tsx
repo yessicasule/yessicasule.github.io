@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { QUOTES, type Quote } from "../data/quotes";
+import { QUOTES } from "../data/quotes";
 import { discover } from "../lib/discoveries";
 
 interface FortuneCookieProps {
@@ -8,7 +8,7 @@ interface FortuneCookieProps {
   onClose: () => void;
 }
 
-function pickQuote(previous?: Quote): Quote {
+function pickQuote(previous?: string): string {
   let q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
   while (QUOTES.length > 1 && q === previous) {
     q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
@@ -44,7 +44,7 @@ const springOut = (x: number, rotate: number) => ({
 
 export function FortuneCookie({ open, onClose }: FortuneCookieProps) {
   const reduced = useReducedMotion();
-  const [quote, setQuote] = useState<Quote | null>(null);
+  const [quote, setQuote] = useState<string | null>(null);
   const [crackId, setCrackId] = useState(0);
 
   useEffect(() => {
@@ -68,8 +68,7 @@ export function FortuneCookie({ open, onClose }: FortuneCookieProps) {
         {reduced ? (
           <div className="cookie__stage cookie__stage--static" key={crackId}>
             <div className="cookie__slip">
-              <p className="cookie__text">“{quote.text}”</p>
-              <p className="cookie__source">— {quote.source}</p>
+              <p className="cookie__text">{quote}</p>
             </div>
           </div>
         ) : (
@@ -117,8 +116,7 @@ export function FortuneCookie({ open, onClose }: FortuneCookieProps) {
               animate={{ opacity: 1, scale: 1, rotateX: 0, y: 0 }}
               transition={{ delay: 0.82, type: "spring", stiffness: 170, damping: 15 }}
             >
-              <p className="cookie__text">“{quote.text}”</p>
-              <p className="cookie__source">— {quote.source}</p>
+              <p className="cookie__text">{quote}</p>
             </motion.div>
           </div>
         )}
